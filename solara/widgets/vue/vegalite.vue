@@ -58,15 +58,15 @@ module.exports = {
             requirejs.undef("vega")
             requirejs.undef("vega-lite")
             requirejs.undef("vega-embed")
-            // require.config({
-            //     map: {
-            //         '*': {
-            //             'vega': `${this.getCdn()}/vega@5/build/vega.min.js`,
-            //             'vega-lite': `${this.getCdn()}/vega-lite@5/build/vega-lite.min.js`,
-            //             'vega-embed': `${this.getCdn()}/vega-embed@6/build/vega-embed.min.js`,
-            //         }
-            //     }
-            // })
+            require.config({
+                map: {
+                    '*': {
+                        'vega': `${this.getCdn()}/vega@5/build/vega.min.js`,
+                        'vega-lite': `${this.getCdn()}/vega-lite@5/build/vega-lite.min.js`,
+                        'vega-embed': `${this.getCdn()}/vega-embed@6/build/vega-embed.min.js`,
+                    }
+                }
+            })
             // pre load
             await new Promise((resolve, reject) => {
                 require(['vega', 'vega-lite', 'vega-embed'], () => {
@@ -108,7 +108,8 @@ module.exports = {
             return base
         },
         getCdn() {
-            return (typeof solara_cdn !== "undefined" && solara_cdn) || `${this.getBaseUrl()}_solara/cdn`;
+            return "https://cdn.jsdelivr.net/npm"
+            // return (typeof solara_cdn !== "undefined" && solara_cdn) || `${this.getBaseUrl()}_solara/cdn`;
         }
     },
 }
